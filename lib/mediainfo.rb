@@ -98,7 +98,7 @@ module MediaInfo
   end
 
   def self.from_uri(input)
-    if input.host.include?('amazonaws.com')
+    if input.host.include?('amazonaws.com') || input.host.include?('storage.googleapis.com')
       MediaInfo::Tracks.new(MediaInfo.run(input.to_s)) # Removed URI.escape due to Error parsing the X-Amz-Credential parameter; the Credential is mal-formed; expecting "&lt;YOUR-AKID&gt;/YYYYMMDD/REGION/SERVICE/aws4_request"
     else
       http = Net::HTTP.new(input.host, input.port) # Check if input is valid
